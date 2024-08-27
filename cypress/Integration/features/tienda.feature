@@ -1,0 +1,8 @@
+Feature: Verify Tienda page
+
+Scenario: Select a producto
+    Given I open the login page    
+     When I type a registered email and password to login
+     And I select the tienda tab
+      And I select a product
+     Then the product detail is displayed     

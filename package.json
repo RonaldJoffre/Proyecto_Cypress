@@ -1,0 +1,22 @@
+{
+  "name": "cypress-cucumber-restored",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.1.2",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.2",
+    "@cucumber/cucumber": "^10.9.0",
+    "cypress": "^13.13.3",
+    "neat-csv": "^7.0.0"
+  },
+  "dependencies": {
+    "papaparse": "^5.4.1"
+  },
+  "description": ""
+}
