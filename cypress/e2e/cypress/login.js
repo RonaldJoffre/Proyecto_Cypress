@@ -1,5 +1,10 @@
 import { faker } from '@faker-js/faker';
+import homePageActions from '../../support/pages/home/homePageActions';
+import loginPageActions from '../../support/pages/login/loginPageActions';
+
 describe('Login', () => {
+    const homePage = new homePageActions();
+    const loginPage = new loginPageActions();
     const randomEmail = faker.internet.email();
     const randomUserName = faker.word.sample();
     const randomPassword = faker.word.sample();
@@ -9,10 +14,9 @@ describe('Login', () => {
     it('invalid email + invalid Password', () => {
 
         cy.visit('https://biodog.es/');
-        cy.xpath("//a[text()='Mi Cuenta']").click({force: true});
-        cy.get('[id="header"]').find('[href="/mi-cuenta/"]').contains("Mi Cuenta").click({force: true});
-        cy.get('[id="username"]').type(randomEmail);
-        cy.get('[id="password"]').type(randomPassword);
+        homePage.clickOnMiCuentaButton();
+        loginPage.setUserNameInput(randomEmail);
+        loginPage.setPasswordInput(randomPassword);
         cy.xpath("//button[text()='Acceder']").click();
         cy.get('.woocommerce-error').within(() => {
             cy.contains('ERROR').should('be.visible');
@@ -24,9 +28,9 @@ describe('Login', () => {
     it('invalid user name + invalid Password', () => {
 
         cy.visit('https://biodog.es/');
-        cy.xpath("//a[text()='Mi Cuenta']").click({force: true});
-        cy.get('[id="username"]').type(randomUserName);
-        cy.get('[id="password"]').type(randomPassword);
+        homePage.clickOnMiCuentaButton();
+        loginPage.setUserNameInput(randomUserName);
+        loginPage.setPasswordInput(randomPassword);
         cy.get('.woocommerce-button').contains("Acceder").click(); 
         cy.get('.woocommerce-error').within(() => {
             cy.contains('ERROR').should('be.visible');
@@ -37,9 +41,9 @@ describe('Login', () => {
     it('valid email + invalid Password', () => {
 
         cy.visit('https://biodog.es/');
-        cy.xpath("//a[text()='Mi Cuenta']").click({force: true});
-        cy.get('[id="username"]').clear().type(validEmail);
-        cy.get('[id="password"]').clear().type(randomPassword);
+        homePage.clickOnMiCuentaButton();
+        loginPage.setUserNameInput(validEmail);
+        loginPage.setPasswordInput(randomPassword);
         cy.get('.woocommerce-button').contains("Acceder").click(); 
         cy.get('.woocommerce-error').within(() => {
             cy.contains('ERROR').should('be.visible');
@@ -53,9 +57,9 @@ describe('Login', () => {
     it('valid email + valid Password', () => {
 
         cy.visit('https://biodog.es/');
-        cy.xpath("//a[text()='Mi Cuenta']").click({force: true});
-        cy.get('[id="username"]').clear().type(validEmail);
-        cy.get('[id="password"]').clear().type(validPassword);
+        homePage.clickOnMiCuentaButton();
+        loginPage.setUserNameInput(validEmail);
+        loginPage.setPasswordInput(validPassword);
         cy.get('.woocommerce-button').contains("Acceder").click(); 
         cy.get('.title30').contains("Mi cuenta").should('be.visible');
         cy.get('.woocommerce-MyAccount-content').within(() => {
