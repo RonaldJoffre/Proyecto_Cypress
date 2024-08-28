@@ -1,7 +1,7 @@
 import Tienda from '../../page_objects/tienda';
 import Common from  '../actions/common_actions'; 
 
-import '@cypress/xpath';
+//import '@cypress/xpath';
 
 const {Given, When, Then} = require('@badeball/cypress-cucumber-preprocessor')
 
