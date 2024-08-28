@@ -1,4 +1,4 @@
-import '@cypress/xpath';
+//import '@cypress/xpath';
 
 const TIENDATAB =  '#nav-menu-item-1300 > .menu-link';
 const FAVORITE =  "//a[contains(text(),'Añadir a la lista')]";
