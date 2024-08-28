@@ -26,7 +26,10 @@ module.exports = defineConfig({
     },
     // Cypress buscará cualquier archivo `.feature` dentro del directorio `cypress/e2e/` y sus subdirectorios.
     //specPattern: '**/*.feature',
-    specPattern: 'cypress/Integration/**/*.feature',
+    specPattern: [
+      'cypress/Integration/**/*.feature',
+      'cypress/e2e/cypress/**/*.js'
+    ],
     baseUrl: 'https://biodog.es',
     //supportFile: 'cypress/support/index.js' 
   },
