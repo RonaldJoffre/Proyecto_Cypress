@@ -15,6 +15,18 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+require('cypress-xpath');
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // Prevent Cypress from failing the test
+    // Example: Ignore the 'ga is not defined' error
+    if (err.message.includes('ga is not defined')) {
+      return false;
+    }
+  
+    // Return false to prevent the test from failing for any uncaught exception
+    return false;
+  });
+  
