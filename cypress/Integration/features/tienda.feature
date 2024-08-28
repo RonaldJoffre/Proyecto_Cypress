@@ -1,8 +1,9 @@
 Feature: Verify Tienda page
 
-Scenario: Select a producto
+Scenario: Mark as favorite
     Given I open the login page    
      When I type a registered email and password to login
-     And I select the tienda tab
+      And I select the tienda tab
       And I select a product
-     Then the product detail is displayed     
+      And I add the product to the favorite list   
+     Then the product is on the favorite list       
