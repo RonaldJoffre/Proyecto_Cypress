@@ -12,6 +12,14 @@ class loginPageActions extends loginPageObjects {
         cy.get(this.passwordInput()).type(password);
     }
 
+    clickOnAccederButtonByXpath(){
+        cy.xpath(this.accederButtonXpath()).click();
+    }
+
+    clickOnAccederButtonByClass(Value){
+        cy.get(this.accederButtonLink()).contains(Value).click(); 
+    }
+
 }
 
 export default loginPageActions;
