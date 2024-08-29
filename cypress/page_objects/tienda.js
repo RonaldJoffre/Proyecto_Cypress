@@ -2,7 +2,9 @@
 
 const TIENDATAB =  '#nav-menu-item-1300 > .menu-link';
 const FAVORITE =  "//a[contains(text(),'Añadir a la lista')]";
+const FAVERORITE_LIST = "//a[contains(text(),'Ver lista de favoritos')]";
 const PRODUCTS_REMOVE = '//td[@class="product-remove"]';
+const PRODUCTS =  '(//div[@class="product-thumb"])';
 
 class Tienda{
     //Click Tienda Tab
@@ -26,6 +28,35 @@ class Tienda{
       
     }
 
+    //Click en ver favoritos
+    favoriteList ()
+    {
+      cy.xpath(FAVERORITE_LIST)
+      .first() // Toma el primer elemento de la lista de resultados
+      .click();
+    }
+
+    //PAra hacer Hover sobre producto
+    clickOpcionesHover(randomIndex, index)
+    {
+      cy.xpath(PRODUCTS +'['+(randomIndex)+']')              
+      .realHover()
+      .wait(2000)                
+      .then(()=> {                    
+          cy.xpath(PRODUCTS+'['+(randomIndex)+']')                      
+            .find('li')
+            .should("be.visible")
+            .then($listItems => {
+              if (index === 0) {
+                cy.wrap($listItems.first()).click();
+              }else {
+                cy.wrap($listItems.eq(index)).click();
+              }                 
+            })
+            
+       });       
+    }
+
     // Borra primer elemto de favoritos par pasar el bug 
     deleteFavorites()
     {
@@ -44,7 +75,21 @@ class Tienda{
       .should('be.visible') // Verifica que el elemento es visible
       .click();
     } 
-  }
+
+    //Obtine el número de productos
+    cartNumberOfProducts()
+    {
+      cy.xpath("//span[@class='mini-cart-number white set-cart-number']")   
+        .invoke('text') 
+        .then((text) => {
+          const quantity = parseInt(text.trim(), 10);
+          Cypress.env('quantityElements', quantity);
+          //cy.log(`Número de productos en el carrito: ${productos}`);
+          //expect(productos).to.be.a('number'); // Ejemplo de aserción
+          //return productos;
+        });  
+    }
+ }
   
   export default new Tienda();
   
