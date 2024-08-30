@@ -1,2 +1,6 @@
 # Node modules
 node_modules/
+.vscode/
+.idea/
+cypress/videos
+cypress/screenshots

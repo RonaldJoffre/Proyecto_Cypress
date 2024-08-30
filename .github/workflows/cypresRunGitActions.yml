@@ -1,0 +1,51 @@
+name: Cypress Actions Test
+
+on:
+
+  workflow_dispatch:
+    inputs:
+      selection:
+        description: 'Select an option'
+        required: true
+        default: 'cypress+cucumber'
+        type: choice
+        options:
+          - 'cypress+cucumber'
+          - 'cypress'
+          - 'full_suite'
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.0.0]        
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: sudo apt-get update -y && sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+
+      - name: Cypress Test run
+        uses: actions/setup-node@v3
+        with: 
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - run: npm install
+
+      - run: |
+          selection=${{ github.event.inputs.selection }}
+          if [[ "$selection" == "cypress+cucumber" ]]; then
+            npx cypress run --browser chrome --spec "cypress/Integration/features/**/*.feature"
+          elif [[ "$selection" == "cypress" ]]; then
+            npx cypress run --browser chrome --spec "cypress/e2e/cypress/**/*"
+          elif [[ "$selection" == "full_suite" ]]; then
+            npx cypress run --browser chrome --spec "cypress/Integration/features/**/*.feature,cypress/e2e/cypress/**/*"
+          else
+            echo "Invalid option selected"
+            exit 1
+          fi
+  
