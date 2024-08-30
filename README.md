@@ -12,6 +12,6 @@ Install Cypress:
 
 run the tests 
 - npm install
-- npx cypress run **test path**
+- npx cypress run **--test path--**
 
 
