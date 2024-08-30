@@ -3,7 +3,7 @@ Prerequisites:
 
 
 Clone the repository:
-- git clone
+- git clone https://github.com/RonaldJoffre/Proyecto_Cypress.git
 
 
 Install Cypress:
