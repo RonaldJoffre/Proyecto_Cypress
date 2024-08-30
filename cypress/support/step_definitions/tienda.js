@@ -161,3 +161,6 @@ Then('the product prices should be in ascending order', () => {
 Then("the product prices should be in descending order", () => {
   Tienda.verifyPricesAreInDescendingOrder();
 });
+When('I hover over a product with index {int}', (index) => {
+  Tienda.clickCompare(index);
+});

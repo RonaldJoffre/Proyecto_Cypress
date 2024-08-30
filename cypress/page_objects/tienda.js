@@ -7,6 +7,13 @@ const PRODUCTS_REMOVE = '//td[@class="product-remove"]';
 const PRODUCTS =  '(//div[@class="product-thumb"])';
 const ORDER_BY_DROPDOWN = '.woocommerce-ordering .orderby'; 
 
+const COMPARE_BUTTON = "//a[contains(text(),'Compare')]";
+
+
+
+
+
+
 class Tienda{
     //Click Tienda Tab
     clickTienda(){
@@ -28,7 +35,20 @@ class Tienda{
       });
       
     }
-
+    // Hacer Hover sobre el producto y hacer clic en "Compare"
+    clickCompare(randomIndex) {
+      cy.xpath(PRODUCTS + '[' + randomIndex + ']') // Selecciona el producto
+      .realHover() // Hace hover sobre el producto
+      .wait(3000) // Espera para que el botón "Compare" sea visible
+      .xpath('.//a[contains(text(),"Compare")]') // Usa XPath relativo para encontrar el botón "Compare" dentro del producto
+      .should('be.visible') // Verifica que el botón "Compare" es visible
+      .click(); // Hace clic en el botón "Compare"
+  }
+  
+    
+    
+      
+    }
     //Click en ver favoritos
     favoriteList ()
     {
@@ -165,6 +185,9 @@ verifyPricesAreInDescendingOrder() {
     });
 }
 
+
+
+    
     }
 
   export default new Tienda();
