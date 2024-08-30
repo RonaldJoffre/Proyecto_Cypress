@@ -39,11 +39,11 @@ jobs:
       - run: |
           selection=${{ github.event.inputs.selection }}
           if [[ "$selection" == "cypress+cucumber" ]]; then
-            npx cypress run --browser chrome --spec "cypress/integration/features/**/*.feature"
+            npx cypress run --browser chrome --spec "cypress/Integration/features/**/*.feature"
           elif [[ "$selection" == "cypress" ]]; then
             npx cypress run --browser chrome --spec "cypress/e2e/cypress/**/*"
           elif [[ "$selection" == "full_suite" ]]; then
-            npx cypress run --browser chrome --spec "cypress/integration/features/**/*.feature,cypress/e2e/cypress/**/*"
+            npx cypress run --browser chrome --spec "cypress/Integration/features/**/*.feature,cypress/e2e/cypress/**/*"
           else
             echo "Invalid option selected"
             exit 1
