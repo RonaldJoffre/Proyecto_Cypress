@@ -10,7 +10,7 @@ Given('I open the home page', () => {
     Common.visitURL('');  
 });
 Then('the title for Biopdog site should be displayed', () => {
-    cy.title().should('eq', 'asdasd');
+    cy.title().should('eq', 'Alimentación natural para perros y gatos con dieta Barf - Biodog');
 });
 
 Then('the title should be {string}', (title) => {
