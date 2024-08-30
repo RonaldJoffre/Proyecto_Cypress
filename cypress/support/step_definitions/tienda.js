@@ -143,5 +143,21 @@ Then("Añadir al carrito button should be disabled", () => {
              "single_add_to_cart_button button alt disabled wc-variation-selection-needed"
      );
 });
-
-
+// Seleccionar la opción para ordenar por precio de menor a mayor
+When("I select the sort by price ascending", () => {
+  Tienda.selectOrderByPriceAscending();
+  cy.wait(2000); // Espera para asegurar que el desplegable se actualice
+});
+When("I select the sort by price descending", () => {
+  Tienda.selectOrderByPriceDescending();
+});
+Then('the sort dropdown should display {string}', (expectedText) => {
+  cy.wait(2000); // Ajusta el tiempo de espera según sea necesario
+  Tienda.verifySortDropdownText(expectedText);
+});
+Then('the product prices should be in ascending order', () => {
+  Tienda.verifyPricesAreInAscendingOrder(); // Llama al método para verificar el orden de precios
+});
+Then("the product prices should be in descending order", () => {
+  Tienda.verifyPricesAreInDescendingOrder();
+});
