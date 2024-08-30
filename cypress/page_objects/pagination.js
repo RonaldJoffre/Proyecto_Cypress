@@ -13,9 +13,11 @@ class Pagination{
 
     item9(){
       cy.xpath(DROPDOWN).realHover();
+      //dropdown list appears with a delay 
       cy.wait(1000); 
       cy.xpath(DROPDOWN_LIST).should('be.visible');
       cy.xpath(DROPDOWN_ITEM9).should('be.visible');
+      //redirects to page 9
       cy.xpath(DROPDOWN_ITEM9).then($el => {
         const url = $el.attr('href');
         cy.visit(url);
