@@ -19,6 +19,7 @@
     "neat-csv": "^7.0.0"
   },
   "dependencies": {
+    "cypress-real-events": "^1.13.0",
     "papaparse": "^5.4.1"
   },
   "description": ""
