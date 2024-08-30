@@ -31,7 +31,7 @@ class Tienda{
           cy.log('El elemento "Añadir a la lista" es visible.');
         } else {
             cy.log('El producto ya está en la lista');
-        }
+        };
       });
       
     }
@@ -43,12 +43,12 @@ class Tienda{
       .xpath('.//a[contains(text(),"Compare")]') // Usa XPath relativo para encontrar el botón "Compare" dentro del producto
       .should('be.visible') // Verifica que el botón "Compare" es visible
       .click(); // Hace clic en el botón "Compare"
-  }
+    }
   
     
     
       
-    }
+  
     //Click en ver favoritos
     favoriteList ()
     {
@@ -95,7 +95,7 @@ class Tienda{
       .first() // Toma el primer elemento de la lista de resultados
       .should('be.visible') // Verifica que el elemento es visible
       .click();
-    } 
+    }; 
 
     //Obtine el número de productos
     cartNumberOfProducts()
@@ -183,12 +183,12 @@ verifyPricesAreInDescendingOrder() {
 
       expect(isSorted).to.be.true; // La aserción final
     });
-}
+  } 
 
 
 
     
-    }
+}
 
   export default new Tienda();
   
