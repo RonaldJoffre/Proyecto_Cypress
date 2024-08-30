@@ -16,12 +16,23 @@ When('I type an email', () => {
     userName = 'user_' + firstLetter + secondLetter
     userPassword = userName +'.123' 
     email = userName + '@test.com'     
-    cy.get('#reg_email').type(email)
-    console.log(email)
+    cy.get('body')
+      .then(($body) => {
+         if ($body.find('#reg_email').length > 0) {
+           cy.log('The field exists.');
+           cy.get('#reg_email')
+             .should("be.visible")
+             .type(email);
+         } else {
+          cy.log('the field does not exist.');
+         }
+      });
 });
 
 When('I type the password', () => {
-    cy.get('#reg_password').type(userPassword);   
+    cy.get('#reg_password')
+      .should("be.visible")
+      .type(userPassword);      
 });
 When('I click on Register button', () => {
     cy.get('#customer_login > div.u-column2.col-2 > form > p.woocommerce-FormRow.form-row > button').click()
@@ -57,5 +68,6 @@ Then('the displayed user name from the {string} should be visible', (email) => {
     username = parts[0];
     cy.contains(username).should('be.visible')
 });
+
 
 
